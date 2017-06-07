@@ -14,3 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('users', 'usersController');
+
+Route::get('/users', 'usersController@index')->name('user');
+
+
+Route::resource('concerts', 'concertsController');
+
+Route::get('/concerts', 'concertsController@index')->name('concert');
