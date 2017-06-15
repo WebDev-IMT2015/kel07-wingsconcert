@@ -38,4 +38,9 @@ Route::post('/transactions', 'transactionsController@simpan');
 
 Route::get('/transactions', 'transactionsController@history')->name('historytransaction');
 
+Route::get('/trans', 'transactionsController@create')->name('transaction');
+
+Route::post('/trans', 'transactionsController@simpan');
+
+Route::get('/trans', 'transactionsController@history')->name('historytransaction');
 
