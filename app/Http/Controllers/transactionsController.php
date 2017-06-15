@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Yajra\Datatables\Datatables;
 
-use App\user;
+use App\transaction;
+use App\concert;
 use Illuminate\Http\Request;
 use Session;
-use Auth;
 
-class usersController extends Controller
+class transactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,16 +24,28 @@ class usersController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $users = user::where('nama', 'LIKE', "%$keyword%")
+            $transactions = transaction::where('id_transaksi', 'LIKE', "%$keyword%")
 				->paginate($perPage);
         } else {
-            $users = user::paginate($perPage);
+            $transactions = transaction::paginate($perPage);
         }
-        if(Auth::user()->id_privilege == 1){
-            return view('users.index', compact('users'));
-        }else{
-            print_r('You shall not pass');
+
+        return view('transactions.index', compact('transactions'));
+    }
+
+    public function history(Request $request)
+    {
+        $keyword = $request->get('search');
+        $perPage = 25;
+
+        if (!empty($keyword)) {
+            $transactions = transaction::where('id_transaksi', 'LIKE', "%$keyword%")
+                ->paginate($perPage);
+        } else {
+            $transactions = transaction::paginate($perPage);
         }
+
+        return view('transactions.history', compact('transactions'));
     }
 
     /**
@@ -42,11 +55,16 @@ class usersController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->id_privilege == 1){
-            return view('users.create', compact('users'));
-        }else{
-            print_r('You shall not pass');
+        //$keyword = $request->get('search');
+        $perPage = 25;
+
+        if (!empty($keyword)) {
+            $concerts = concert::where('id_concert', 'LIKE', "%%")
+                ->paginate($perPage);
+        } else {
+            $concerts = concert::paginate($perPage);
         }
+        return view('transactions.create', compact('concerts'));
     }
 
     /**
@@ -60,16 +78,14 @@ class usersController extends Controller
     {
         
         $requestData = $request->all();
-		
-		$requestData['password'] = bcrypt($requestData['password']);
-		
-		// print_r($requestData);die();
-		
-        user::create($requestData);
+        
+        print_r($requestData);die();
 
-        Session::flash('flash_message', 'user added!');
+        transaction::create($requestData);
 
-        return redirect('users');
+        Session::flash('flash_message', 'transaction added!');
+
+        return redirect('transactions');
     }
 
     /**
@@ -81,9 +97,9 @@ class usersController extends Controller
      */
     public function show($id)
     {
-        $user = user::findOrFail($id);
+        $transaction = transaction::findOrFail($id);
 
-        return view('users.show', compact('user'));
+        return view('transactions.show', compact('transaction'));
     }
 
     /**
@@ -95,9 +111,9 @@ class usersController extends Controller
      */
     public function edit($id)
     {
-        $user = user::findOrFail($id);
+        $transaction = transaction::findOrFail($id);
 
-        return view('users.edit', compact('user'));
+        return view('transactions.edit', compact('transaction'));
     }
 
     /**
@@ -113,12 +129,12 @@ class usersController extends Controller
         
         $requestData = $request->all();
         
-        $user = user::findOrFail($id);
-        $user->update($requestData);
+        $transaction = transaction::findOrFail($id);
+        $transaction->update($requestData);
 
-        Session::flash('flash_message', 'user updated!');
+        Session::flash('flash_message', 'transaction updated!');
 
-        return redirect('users');
+        return redirect('transactions');
     }
 
     /**
@@ -130,10 +146,10 @@ class usersController extends Controller
      */
     public function destroy($id)
     {
-        user::destroy($id);
+        transaction::destroy($id);
 
-        Session::flash('flash_message', 'user deleted!');
+        Session::flash('flash_message', 'transaction deleted!');
 
-        return redirect('users');
+        return redirect('transactions');
     }
 }

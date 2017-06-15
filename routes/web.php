@@ -19,11 +19,23 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('users', 'usersController');
+Route::get('/cshome', 'HomeController@index')->name('cshome');
 
+
+
+
+Route::resource('users', 'usersController');
 Route::get('/users', 'usersController@index')->name('user');
 
-
 Route::resource('concerts', 'concertsController');
-
 Route::get('/concerts', 'concertsController@index')->name('concert');
+
+Route::resource('transactions', 'transactionsController');
+
+Route::get('/transactions', 'transactionsController@create')->name('transaction');
+
+Route::post('/transactions', 'transactionsController@simpan');
+
+Route::get('/transactions', 'transactionsController@history')->name('historytransaction');
+
+

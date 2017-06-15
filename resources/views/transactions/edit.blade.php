@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit concert #{{ $concert->id_concert }}</div>
+                    <div class="panel-heading">Edit transaction #{{ $transaction->id }}</div>
                     <div class="panel-body">
-                        <a href="{{ url('/concerts') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/transactions') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,14 +21,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($concert, [
+                        {!! Form::model($transaction, [
                             'method' => 'PATCH',
-                            'url' => ['/concerts', $concert->id_concert],
+                            'url' => ['/transactions', $transaction->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('concerts.form', ['submitButtonText' => 'Update'])
+                        @include ('transactions.form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 

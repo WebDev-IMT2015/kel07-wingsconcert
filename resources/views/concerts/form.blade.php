@@ -1,12 +1,13 @@
 <div class="form-group {{ $errors->has('id_concert') ? 'has-error' : ''}}">
-    {!! Form::label('id_concert', 'Id Concert', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-6">
-        {!! Form::text('id_concert', null, ['class' => 'form-control']) !!}
+    {!! Form::hidden('id_concert', 'Id Concert', ['class' => 'col-md-4 control-label']) !!}
+    
+        {!! Form::hidden('id_concert', null, ['class' => 'form-control']) !!}
         {!! $errors->first('id_concert', '<p class="help-block">:message</p>') !!}
-    </div>
+    
     {!! Form::label('kelas', 'Class', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('kelas', null, ['class' => 'form-control']) !!}
+        <!-- {!! Form::select('kelas', ['Regular', 'VIP', 'VVIP', 'SSVIP'], null, ['class' => 'form-control']) !!} -->
+        {!! Form::select('kelas', array('Regular' => 'Regular', 'VIP' => 'VIP', 'VVIP' => 'VVIP', 'SVIP' => 'SVIP'), null, ['class' => 'form-control']) !!}
         {!! $errors->first('kelas', '<p class="help-block">:message</p>') !!}
     </div>
     {!! Form::label('kapasitas', 'Capacity', ['class' => 'col-md-4 control-label']) !!}
@@ -21,12 +22,12 @@
     </div>
     {!! Form::label('jadwal_mulai', 'From', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('jadwal_mulai', null, ['class' => 'form-control']) !!}
+        {!! Form::input('datetime-local','jadwal_mulai', null, ['class' => 'form-control']) !!}
         {!! $errors->first('jadwal_mulai', '<p class="help-block">:message</p>') !!}
     </div>
     {!! Form::label('jadwal_selesai', 'To', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('jadwal_selesai', null, ['class' => 'form-control']) !!}
+        {!! Form::input('datetime-local','jadwal_selesai', null, ['class' => 'form-control']) !!}
         {!! $errors->first('jadwal_selesai', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

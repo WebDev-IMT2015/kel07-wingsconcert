@@ -7,11 +7,8 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit concert #{{ $concert->id_concert }}</div>
+                    <div class="panel-heading">Create New transaction</div>
                     <div class="panel-body">
-                        <a href="{{ url('/concerts') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <br />
-                        <br />
 
                         @if ($errors->any())
                             <ul class="alert alert-danger">
@@ -21,16 +18,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($concert, [
-                            'method' => 'PATCH',
-                            'url' => ['/concerts', $concert->id_concert],
-                            'class' => 'form-horizontal',
-                            'files' => true
-                        ]) !!}
+                        {!! Form::open(['url' => '/transactions', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('concerts.form', ['submitButtonText' => 'Update'])
+                        @include ('transactions.form')
+
 
                         {!! Form::close() !!}
+
+                    </div>
 
                     </div>
                 </div>

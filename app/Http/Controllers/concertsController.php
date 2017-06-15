@@ -22,7 +22,7 @@ class concertsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $concerts = concert::where('id_concert', 'LIKE', "%$keyword%")
+            $concerts = concert::where('kelas', 'LIKE', "%$keyword%")
 				->paginate($perPage);
         } else {
             $concerts = concert::paginate($perPage);
@@ -52,6 +52,9 @@ class concertsController extends Controller
     {
         
         $requestData = $request->all();
+
+
+        //print_r($requestData);die();
         
         concert::create($requestData);
 

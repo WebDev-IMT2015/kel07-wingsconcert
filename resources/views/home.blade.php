@@ -11,13 +11,22 @@
                     You are logged in!
                 </div>
 
-
             </div>
+                <!-- <div class="container_web">
+                    <a href="{{ route('user') }}">User</a>
+                    <br>    
+                    <a href="{{ route('concert') }}">Wings Concert</a>
+                    <br>
+                </div> -->
+                
                 <div class="container_web">
                     <a href="{{ route('user') }}">User</a>
                     <br>    
                     <a href="{{ route('concert') }}">Wings Concert</a>
+                    <br>
+                    <a href="{{ route('historytransaction') }}">History</a>
                 </div>
+                
         </div>
     </div>
 </div>
