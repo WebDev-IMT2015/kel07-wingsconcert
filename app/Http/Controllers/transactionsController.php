@@ -79,7 +79,7 @@ class transactionsController extends Controller
         
         $requestData = $request->all();
         
-        print_r($requestData);die();
+        //print_r($requestData);die();
 
         transaction::create($requestData);
 
