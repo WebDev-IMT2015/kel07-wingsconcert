@@ -7,7 +7,12 @@
     </div>
     {!! Form::label('id_privilege', 'Privilege', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('id_privilege', array('1' => 'Admin', '2' => 'Customer Service'), null, ['class' => 'form-control']) !!}
+        <!-- {!! //Form::select('id_privilege', array('1' => 'Admin', '2' => 'Customer Service'), null, ['class' => 'form-control']) !!} -->
+        <select class="form-control" name="id_concert">
+            @foreach($concerts as $konser)
+              <option value="{{$konser->id_concert}}">{{$konser->id_concert}}</option>
+            @endforeach
+        </select>
         {!! $errors->first('id_privilege', '<p class="help-block">:message</p>') !!}
     </div>
     {!! Form::label('email', 'Email', ['class' => 'col-md-4 control-label']) !!}

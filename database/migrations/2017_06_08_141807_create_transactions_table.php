@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('telp');
+            $table->integer('id_concert');
             $table->timestamps();
         });
     }
