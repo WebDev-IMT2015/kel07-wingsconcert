@@ -27,5 +27,9 @@ class concert extends Model
      */
     protected $fillable = ['id_concert','kelas','kapasitas','harga','jadwal_mulai','jadwal_selesai'];
 
+    public function transaksi()
+    {
+        return $this->belongsTo('transaction');
+    }
     
 }

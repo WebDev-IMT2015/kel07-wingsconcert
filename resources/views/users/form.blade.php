@@ -5,11 +5,13 @@
         {!! Form::text('name', null, ['class' => 'form-control']) !!}
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
+
     {!! Form::label('id_privilege', 'Privilege', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('id_privilege', array('1' => 'Admin', '2' => 'Customer Service'), null, ['class' => 'form-control']) !!}
-        {!! $errors->first('id_privilege', '<p class="help-block">:message</p>') !!}
+    {!! Form::select('id_privilege', array('1' => 'Admin', '2' => 'Customer Service'), null, ['class' => 'form-control']) !!}
+    {!! $errors->first('id_privilege', '<p class="help-block">:message</p>') !!}
     </div>
+    
     {!! Form::label('email', 'Email', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('email', null, ['class' => 'form-control']) !!}

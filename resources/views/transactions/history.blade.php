@@ -10,16 +10,7 @@
                     <div class="panel-heading">History Transactions</div>
                     <div class="panel-body">
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/transactions', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        {!! Form::close() !!}
+                        
 
                         <br/>
                         <br/>
@@ -27,7 +18,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>Id Transaksi</th><th>Name</th><th>Address</th><th>Telp</th><th>Actions</th>
+                                        <th>Id Transaksi</th><th>Name</th><th>Address</th><th>Telp</th><th>Id Concert</th><th>Class</th><th>Price</th><th>From</th><th>To</th><th>Bought at</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,6 +28,12 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->address }}</td>
                                         <td>{{ $item->telp }}</td>
+                                        <td>{{ $item->id_concert }}</td>
+                                        <td>{{ $item->kelas }}</td>
+                                        <td>{{ $item->harga }}</td>
+                                        <td>{{ $item->jadwal_mulai }}</td>
+                                        <td>{{ $item->jadwal_selesai }}</td>
+                                        <td>{{ $item->tgltransaksi }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

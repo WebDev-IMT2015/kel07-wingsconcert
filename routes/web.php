@@ -34,7 +34,11 @@ Route::resource('transactions', 'transactionsController');
 
 Route::get('/transactions', 'transactionsController@create')->name('transaction');
 
-Route::post('/transactions', 'transactionsController@simpan');
+//Route::post('/transactions', 'transactionsController@simpan');
 
-Route::get('/transactions', 'transactionsController@history')->name('historytransaction');
+Route::get('/historytransactions', 'transactionsController@history')->name('historytransaction');
+
+//Route::post('transactions/simpan','transactionsController@simpan');
+
+// Route::get('/transactions/getdataconcert', 'transactionsController@getdataconcert')->name('getdataconcert');
 

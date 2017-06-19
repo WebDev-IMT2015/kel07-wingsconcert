@@ -11,6 +11,8 @@ use App\concert;
 use Illuminate\Http\Request;
 use Session;
 
+use DB;
+
 class transactionsController extends Controller
 {
     /**
@@ -39,12 +41,20 @@ class transactionsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $transactions = transaction::where('id_transaksi', 'LIKE', "%$keyword%")
-                ->paginate($perPage);
+            $transactions = DB::table('transactions')
+            ->join('concerts', 'concerts.id_concert', '=', 'transactions.id_concert')
+            //->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('transactions.*', 'concerts.*')
+            ->where('transaction.id_transaksi', 'LIKE', "%$keyword%")
+            ->paginate(25);
         } else {
-            $transactions = transaction::paginate($perPage);
+             $transactions = DB::table('transactions')
+            ->join('concerts', 'concerts.id_concert', '=', 'transactions.id_concert')
+            //->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('transactions.*', 'concerts.*','transactions.created_at as tgltransaksi')
+            ->paginate(25);
         }
-
+       
         return view('transactions.history', compact('transactions'));
     }
 
@@ -55,15 +65,10 @@ class transactionsController extends Controller
      */
     public function create()
     {
-        //$keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $concerts = concert::where('id_concert', 'LIKE', "%%")
-                ->paginate($perPage);
-        } else {
-            $concerts = concert::paginate($perPage);
-        }
+      //   $concerts = array(
+      //   'itemlist' =>  DB::table('concerts')->get()
+      // );
+        $concerts = concert::all(['id_concert', 'kelas','kapasitas','harga','jadwal_mulai','jadwal_selesai']);
         return view('transactions.create', compact('concerts'));
     }
 
@@ -79,9 +84,16 @@ class transactionsController extends Controller
         
         $requestData = $request->all();
         
-        print_r($requestData);die();
+        //print_r($request->input('id_concert'));die();
 
-        transaction::create($requestData);
+        //transaction::create($requestData);
+
+        if(transaction::create($requestData))
+        {
+            $concerts = concert::findOrFail($request->input('id_concert'));
+            $concerts->kapasitas = $concerts->kapasitas - 1;
+            $concerts->update();
+        }
 
         Session::flash('flash_message', 'transaction added!');
 
@@ -152,4 +164,6 @@ class transactionsController extends Controller
 
         return redirect('transactions');
     }
+
+    
 }

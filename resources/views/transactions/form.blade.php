@@ -1,4 +1,4 @@
-<div class="form-group {{ $errors->has('id_transaksi') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('id_transaksi') ? 'has-error' : ''}}" id="master-form">
     <!-- {!! Form::label('id_transaksi', 'Id Transaksi', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::number('id_transaksi', null, ['class' => 'form-control']) !!}
@@ -19,35 +19,18 @@
         {!! Form::text('telp', null, ['class' => 'form-control']) !!}
         {!! $errors->first('telp', '<p class="help-block">:message</p>') !!}
     </div>
-
-    <div>
-        <table class="table table-borderless">
-            <thead>
-                <tr>
-                 	<th>Id Concert</th><th>Class</th><th>Capacity</th><th>Price</th><th>From</th><th>To</th><th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
+    
+    {!! Form::label('id_concert', 'Concert', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+            
+          <select class="form-control" name="id_concert">
+          
             @foreach($concerts as $item)
-                <tr>
-                    <td>{{ $item->id_concert }}</td>
-                    <td>{{ $item->kelas }}</td>
-                    <td>{{ $item->kapasitas }}</td>
-                    <td>{{ $item->harga }}</td>
-                    <td>{{ $item->jadwal_mulai }}</td>
-                    <td>{{ $item->jadwal_selesai }}</td>
-                    <td>
-					    
-					        {!! Form::number('kapasitas', null, ['class' => 'form-control']) !!}
-					        {!! $errors->first('kapasitas', '<p class="help-block">:message</p>') !!}
-					    
-                    </td>
-                </tr>
+              <option value="{{$item->id_concert}}">{{$item->kelas}} / {{$item->kapasitas}} / {{$item->harga}} / {{$item->jadwal_mulai}} - {{$item->jadwal_selesai}}</option>
             @endforeach
-            </tbody>
-        </table>
+          </select>
+          <p>Kelas / Capacity / Price / From - To</p>
     </div>
-
 </div>
 
 
