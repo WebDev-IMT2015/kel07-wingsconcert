@@ -27,10 +27,5 @@ class transaction extends Model
      */
     protected $fillable = ['name','address','telp','id_concert'];
 
-    
-    public function konser()
-    {
-        return $this->hasMany('id_concert');
-    }
 
 }
