@@ -84,7 +84,11 @@ class transactionsController extends Controller
         
         $requestData = $request->all();
         
+<<<<<<< HEAD
         //print_r($request->input('id_concert'));die();
+=======
+        //print_r($requestData);die();
+>>>>>>> 71d7ddbf09a35d8fe1656d9520d924d775ff88df
 
         //transaction::create($requestData);
 
