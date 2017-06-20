@@ -23,6 +23,8 @@ class concertsController extends Controller
 
         if (!empty($keyword)) {
             $concerts = concert::where('kelas', 'LIKE', "%$keyword%")
+                ->orWhere('kapasitas','LIKE','%'.$keyword.'%')
+                ->orWhere('harga','LIKE','%'.$keyword.'%')
 				->paginate($perPage);
         } else {
             $concerts = concert::paginate($perPage);
@@ -50,6 +52,13 @@ class concertsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'kelas' => 'required',
+            'kapasitas' => 'required',
+            'harga' => 'required',
+            'jadwal_mulai' => 'required',
+            'jadwal_selesai' => 'required',
+            ]);
         
         $requestData = $request->all();
 

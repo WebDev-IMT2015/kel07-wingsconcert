@@ -81,6 +81,12 @@ class transactionsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'address' => 'required',
+            'telp' => 'required',
+            'id_concert' => 'required',
+            ]);
         
         $requestData = $request->all();
         
