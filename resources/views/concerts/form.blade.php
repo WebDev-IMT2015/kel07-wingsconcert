@@ -7,7 +7,7 @@
     {!! Form::label('kelas', 'Class', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <!-- {!! Form::select('kelas', ['Regular', 'VIP', 'VVIP', 'SSVIP'], null, ['class' => 'form-control']) !!} -->
-        {!! Form::select('kelas', array('Regular' => 'Regular', 'VIP' => 'VIP', 'VVIP' => 'VVIP', 'SVIP' => 'SVIP'), null, ['class' => 'form-control']) !!}
+        {!! Form::select('kelas', array('Regular' => 'Regular', 'VIP' => 'VIP', 'VVIP' => 'VVIP', 'SVIP' => 'SVIP', 'SSVIP' => 'SSVIP'), null, ['class' => 'form-control']) !!}
         {!! $errors->first('kelas', '<p class="help-block">:message</p>') !!}
     </div>
     {!! Form::label('kapasitas', 'Capacity', ['class' => 'col-md-4 control-label']) !!}
