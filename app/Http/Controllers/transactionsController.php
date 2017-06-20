@@ -6,8 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
 
-use App\transaction;
-use App\concert;
+use App\Transaction;
+use App\Concert;
 use Illuminate\Http\Request;
 use Session;
 
@@ -26,10 +26,10 @@ class transactionsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $transactions = transaction::where('id_transaksi', 'LIKE', "%$keyword%")
+            $transactions = Transaction::where('id_transaksi', 'LIKE', "%$keyword%")
 				->paginate($perPage);
         } else {
-            $transactions = transaction::paginate($perPage);
+            $transactions = Transaction::paginate($perPage);
         }
 
         return view('transactions.index', compact('transactions'));
@@ -68,7 +68,7 @@ class transactionsController extends Controller
       //   $concerts = array(
       //   'itemlist' =>  DB::table('concerts')->get()
       // );
-        $concerts = concert::all(['id_concert', 'kelas','kapasitas','harga','jadwal_mulai','jadwal_selesai']);
+        $concerts = Concert::all(['id_concert', 'kelas','kapasitas','harga','jadwal_mulai','jadwal_selesai']);
         return view('transactions.create', compact('concerts'));
     }
 
@@ -94,9 +94,9 @@ class transactionsController extends Controller
 
         //transaction::create($requestData);
 
-        if(transaction::create($requestData))
+        if(Transaction::create($requestData))
         {
-            $concerts = concert::findOrFail($request->input('id_concert'));
+            $concerts = Concert::findOrFail($request->input('id_concert'));
             $concerts->kapasitas = $concerts->kapasitas - 1;
             $concerts->update();
         }
@@ -115,7 +115,7 @@ class transactionsController extends Controller
      */
     public function show($id)
     {
-        $transaction = transaction::findOrFail($id);
+        $transaction = Transaction::findOrFail($id);
 
         return view('transactions.show', compact('transaction'));
     }
@@ -129,7 +129,7 @@ class transactionsController extends Controller
      */
     public function edit($id)
     {
-        $transaction = transaction::findOrFail($id);
+        $transaction = Transaction::findOrFail($id);
 
         return view('transactions.edit', compact('transaction'));
     }
@@ -147,7 +147,7 @@ class transactionsController extends Controller
         
         $requestData = $request->all();
         
-        $transaction = transaction::findOrFail($id);
+        $transaction = Transaction::findOrFail($id);
         $transaction->update($requestData);
 
         Session::flash('flash_message', 'transaction updated!');
@@ -164,7 +164,7 @@ class transactionsController extends Controller
      */
     public function destroy($id)
     {
-        transaction::destroy($id);
+        Transaction::destroy($id);
 
         Session::flash('flash_message', 'transaction deleted!');
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\concert;
+use App\Concert;
 use Illuminate\Http\Request;
 use Session;
 
@@ -22,12 +22,12 @@ class concertsController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $concerts = concert::where('kelas', 'LIKE', "%$keyword%")
+            $concerts = Concert::where('kelas', 'LIKE', "%$keyword%")
                 ->orWhere('kapasitas','LIKE','%'.$keyword.'%')
                 ->orWhere('harga','LIKE','%'.$keyword.'%')
 				->paginate($perPage);
         } else {
-            $concerts = concert::paginate($perPage);
+            $concerts = Concert::paginate($perPage);
         }
 
         return view('concerts.index', compact('concerts'));
@@ -65,7 +65,7 @@ class concertsController extends Controller
 
         //print_r($requestData);die();
         
-        concert::create($requestData);
+        Concert::create($requestData);
 
         Session::flash('flash_message', 'concert added!');
 
@@ -81,7 +81,7 @@ class concertsController extends Controller
      */
     public function show($id)
     {
-        $concert = concert::findOrFail($id);
+        $concert = Concert::findOrFail($id);
 
         return view('concerts.show', compact('concert'));
     }
@@ -95,7 +95,7 @@ class concertsController extends Controller
      */
     public function edit($id)
     {
-        $concert = concert::findOrFail($id);
+        $concert = Concert::findOrFail($id);
 
         return view('concerts.edit', compact('concert'));
     }
@@ -113,7 +113,7 @@ class concertsController extends Controller
         
         $requestData = $request->all();
         
-        $concert = concert::findOrFail($id);
+        $concert = Concert::findOrFail($id);
         $concert->update($requestData);
 
         Session::flash('flash_message', 'concert updated!');
@@ -130,7 +130,7 @@ class concertsController extends Controller
      */
     public function destroy($id)
     {
-        concert::destroy($id);
+        Concert::destroy($id);
 
         Session::flash('flash_message', 'concert deleted!');
 

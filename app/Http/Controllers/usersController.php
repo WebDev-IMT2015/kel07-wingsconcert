@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\user;
+use App\User;
 use Illuminate\Http\Request;
 use Session;
 use Auth;
@@ -23,10 +23,10 @@ class usersController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $users = user::where('name', 'LIKE', "%$keyword%")
+            $users = User::where('name', 'LIKE', "%$keyword%")
 				->paginate($perPage);
         } else {
-            $users = user::paginate($perPage);
+            $users = User::paginate($perPage);
         }
         if(Auth::user()->id_privilege == 1){
             return view('users.index', compact('users'));
@@ -69,7 +69,7 @@ class usersController extends Controller
 		
 		// print_r($requestData);die();
 		
-        user::create($requestData);
+        User::create($requestData);
 
         Session::flash('flash_message', 'user added!');
 
@@ -85,7 +85,7 @@ class usersController extends Controller
      */
     public function show($id)
     {
-        $user = user::findOrFail($id);
+        $user = User::findOrFail($id);
 
         return view('users.show', compact('user'));
     }
@@ -99,7 +99,7 @@ class usersController extends Controller
      */
     public function edit($id)
     {
-        $user = user::findOrFail($id);
+        $user = User::findOrFail($id);
 
         return view('users.edit', compact('user'));
     }
@@ -117,7 +117,7 @@ class usersController extends Controller
         
         $requestData = $request->all();
         
-        $user = user::findOrFail($id);
+        $user = User::findOrFail($id);
         $user->update($requestData);
 
         Session::flash('flash_message', 'user updated!');
@@ -134,7 +134,7 @@ class usersController extends Controller
      */
     public function destroy($id)
     {
-        user::destroy($id);
+        User::destroy($id);
 
         Session::flash('flash_message', 'user deleted!');
 
