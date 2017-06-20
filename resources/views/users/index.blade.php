@@ -30,7 +30,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Name</th><th>Email</th><th>Actions</th>
+                                        <th>ID</th><th>Name</th><th>Email</th><th>Id Privilege</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,6 +40,7 @@
                                         <td>{{ $item->name }}</td>
 
                                         <td>{{ $item->email }}</td>
+                                        <td>{{ $item->id_privilege }}</td>
                                         <td>
                                             <a href="{{ url('/users/' . $item->id) }}" title="View user"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/users/' . $item->id . '/edit') }}" title="Edit user"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
